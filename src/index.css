@@ -11,3 +11,139 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.listingsPage{
+  height: 100%;
+  width: 100%;
+}
+
+.todayPollContainer{
+  display: flex;
+  height: 50%;
+  width: 100%;
+  background-color: #D4D4D4;
+}
+
+.otherPollContainer{
+  margin-top: 30px;
+  height: 50%;
+  /* border: 1px solid red; */
+}
+
+.otherPoll1{
+  height: 200px;
+  width: 50%;
+  border-right: 1px solid #D0D0D0;
+  border-bottom: 1px solid #D0D0D0;
+}
+.otherPoll2{
+  height: 200px;
+  width: 50%;
+  border-bottom: 1px solid #D0D0D0;
+}
+.otherPoll3{
+  height: 200px;
+  width: 50%;
+  border-right: 1px solid #D0D0D0;
+}
+.otherPoll4{
+  height: 200px;
+  width: 50%;
+}
+
+.otherPollTop{
+  width: 100%;
+  display: flex;
+}
+
+.otherPollBottom{
+  width: 100%;
+  display: flex;
+}
+
+.otherPollDetails{
+  /* border: 1px solid red; */
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.otherPollChart{
+  /* border: 1px solid blue; */
+  width: 30%;
+  height: 60%;
+}
+
+.otherPollDateTitle{
+  /* border: 1px solid purple; */
+  width: 70%;
+  height: 60%;
+}
+
+.otherPollDate{
+  height: 30%;
+  /* background-color:red; */
+}
+
+.otherPollTitle{
+  height: 70%;
+  padding-right: 10px;
+  /* background-color:blue; */
+}
+
+.todayPollLeft{
+  width: 65%;
+ /* background-color:blue; */
+ height: 85%;
+  border-bottom: 1px solid #AEAEAE;
+  padding: 10px
+}
+
+.todayPollRight{
+  width: 35%;
+ /* background-color:red; */
+ height: 85%;
+ border-bottom: 1px solid #AEAEAE;
+ padding: 10px;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+}
+
+.todayPollTitle{
+  height: 15%;
+  display: flex;
+  align-items: center;
+  font-size: 25px;
+}
+
+.todayPollName{
+  height: 20%;
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+  /* border: 1px solid red; */
+}
+
+.voteContainer{
+  height: 56%;
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  font-size: 20px;
+  /* border: 1px solid blue; */
+  justify-content: center;
+}
+
+.voteButton{
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+
+.todayPollTotalVotes{
+  height: 10%;
+  display: flex;
+  align-items: center;
+  /* border: 1px solid red; */
+}
