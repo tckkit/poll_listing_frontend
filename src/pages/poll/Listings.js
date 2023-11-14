@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { getData, postData } from "../../utilities/apiHelper";
 import { PollVote } from "../../components/pollVote";
+import { useNavigate } from "react-router-dom";
 
 import { Doughnut } from "react-chartjs-2";
 ChartJS.register(ArcElement, Tooltip, Legend);
@@ -70,6 +71,7 @@ function convertTimestampToDateString(timestamp) {
 }
 
 export function Component() {
+  const navigate = useNavigate();
   const [pollsArr, setPollsArr] = useState([]);
 
   const fetchPolls = async () => {
@@ -133,6 +135,11 @@ export function Component() {
     ></Doughnut>
   );
 
+  const handleRedirect = (id) => {
+    console.log(id, "idddd");
+    navigate(`/poll/${id}`);
+  };
+
   return (
     <div className="listingsPage">
       {pollsArr.length > 0 && (
@@ -143,7 +150,10 @@ export function Component() {
           {pollsArr.length > 0 &&
             pollsArr.slice(1, 3).map((poll, i) => (
               <div className={`otherPoll${i + 1}`}>
-                <div className="otherPollDetails">
+                <div
+                  className="otherPollDetails"
+                  onClick={() => handleRedirect(poll.id)}
+                >
                   <div className="otherPollChart">
                     <DoughnutIcon />
                   </div>
@@ -161,7 +171,10 @@ export function Component() {
           {pollsArr.length > 0 &&
             pollsArr.slice(3, 5).map((poll, i) => (
               <div className={`otherPoll${i + 3}`}>
-                <div className="otherPollDetails">
+                <div
+                  className="otherPollDetails"
+                  onClick={() => handleRedirect(poll.id)}
+                >
                   <div className="otherPollChart">
                     <DoughnutIcon />
                   </div>

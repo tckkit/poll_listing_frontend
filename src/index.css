@@ -177,7 +177,7 @@ code {
   margin-bottom: 5px;
   margin-top: 5px;
   height: 1.5em;
-  width: 3em;
+  max-width: 230px;
   font-size: 1.3em;
 }
 
@@ -221,4 +221,12 @@ code {
 
 .publishTime{
   margin-right: 5px;
+}
+
+.otherPollDetails:hover {
+  cursor: pointer;
+}
+
+.voteButton:hover{
+  cursor: pointer;
 }
