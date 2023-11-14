@@ -31,8 +31,15 @@ const transformSurveyData = (input) => {
 
 // Function to generate random colors for the charts
 function generateColors(numColors) {
-  const colors = ["#E3680E", "#1B3F70"];
-  for (let i = 2; i < numColors; i++) {
+  const colors = [
+    "#E3680E",
+    "#1B3F70",
+    "#FFC300",
+    "#4CAF50",
+    "#9C27B0",
+    "3498DB",
+  ];
+  for (let i = 6; i < numColors; i++) {
     const color = `#${Math.floor(Math.random() * 16777215).toString(16)}`;
     colors.push(color);
   }
