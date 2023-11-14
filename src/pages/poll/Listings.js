@@ -1,21 +1,10 @@
 import React, { useEffect, useState } from "react";
-import Box from "@mui/system/Box";
-import Grid from "@mui/system/Unstable_Grid";
-import styled from "@mui/system/styled";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { getData, postData } from "../../utilities/apiHelper";
+import { PollVote } from "../../components/pollVote";
 
 import { Doughnut } from "react-chartjs-2";
 ChartJS.register(ArcElement, Tooltip, Legend);
-
-const Item = styled("div")(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-  border: "1px solid",
-  borderColor: theme.palette.mode === "dark" ? "#444d58" : "#ced7e0",
-  padding: theme.spacing(1),
-  borderRadius: "4px",
-  textAlign: "center",
-}));
 
 const transformSurveyData = (input) => {
   const output = input.map((survey) => {
@@ -82,17 +71,6 @@ function convertTimestampToDateString(timestamp) {
 
 export function Component() {
   const [pollsArr, setPollsArr] = useState([]);
-  const [todayPollData, setTodayPollData] = useState({
-    datasets: [
-      {
-        label: "Vote",
-        data: [3, 6],
-        backgroundColor: ["#E3680E", "#2F5A87"],
-        borderColor: ["#E3680E", "#2F5A87"],
-      },
-    ],
-  });
-  const [todayPollColor, setTodayPollColor] = useState([]);
 
   const fetchPolls = async () => {
     const data = await getData(`http://localhost:8080/poll/`);
@@ -108,43 +86,9 @@ export function Component() {
     const outputData = transformSurveyData(pollsArr);
     if (outputData.length > 0) {
       const todayData = outputData[0];
-      setTodayPollData(todayData);
-      setTodayPollColor(todayData.datasets[0].backgroundColor);
     } else {
-      setTodayPollData({
-        datasets: [
-          {
-            label: "Vote",
-            data: [3, 6],
-            backgroundColor: ["#E3680E", "#2F5A87"],
-            borderColor: ["#E3680E", "#2F5A87"],
-          },
-        ],
-      });
     }
   }, [pollsArr]);
-
-  const todayPollTextCenter = {
-    id: "textCenter",
-    beforeDatasetsDraw(chart, args, pluginOptions) {
-      const { ctx, data } = chart;
-
-      ctx.save();
-      ctx.font = "bold 50px sans-serif";
-      ctx.fillStyle = "white";
-      ctx.textAlign = "center";
-      const xCoor = chart.getDatasetMeta(0).data[0].x;
-      const yCoor = chart.getDatasetMeta(0).data[0].y;
-      ctx.fillText("%", xCoor, yCoor);
-    },
-  };
-  const todayPollOptions = {
-    plugins: {
-      legend: {
-        display: true,
-      },
-    },
-  };
 
   // Doughnut Icon
   const doughnutIconData = {
@@ -191,48 +135,9 @@ export function Component() {
 
   return (
     <div className="listingsPage">
-      <div className="todayPollContainer">
-        <div className="todayPollLeft">
-          <div className="todayPollTitle">Today's Poll</div>
-          <div className="todayPollName">
-            {pollsArr.length > 0 && pollsArr[0].title}{" "}
-            <span className="pollDate">
-              {pollsArr.length > 0 &&
-                convertTimestampToDateString(pollsArr[0].published_date)}
-            </span>
-          </div>
-          <div className="voteContainer">
-            {pollsArr.length > 0 &&
-              todayPollColor.length > 0 &&
-              pollsArr[0].answers.map((answer, i) => (
-                <button
-                  className="voteButton"
-                  index={i}
-                  key={answer.id}
-                  style={{
-                    backgroundColor: todayPollColor[i],
-                    color: "white",
-                    border: "none",
-                    fontWeight: 900,
-                  }}
-                >
-                  {answer.label.toUpperCase()}
-                </button>
-              ))}
-          </div>
-          <div className="todayPollTotalVotes">
-            Total number of votes recorded:{" "}
-            {pollsArr.length > 0 && pollsArr[0].totalVoteCount}
-          </div>
-        </div>
-        <div className="todayPollRight">
-          <Doughnut
-            data={todayPollData}
-            plugins={[todayPollTextCenter]}
-            options={todayPollOptions}
-          ></Doughnut>
-        </div>
-      </div>
+      {pollsArr.length > 0 && (
+        <PollVote data={pollsArr[0]} isTodayPoll={true} />
+      )}
       <div className="otherPollContainer">
         <div className="otherPollTop">
           {pollsArr.length > 0 &&

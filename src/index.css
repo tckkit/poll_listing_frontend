@@ -21,7 +21,14 @@ code {
   display: flex;
   height: 50%;
   width: 100%;
+}
+
+.greyBackground{
   background-color: #D4D4D4;
+}
+
+.blueBackground{
+  background-color: #B7D9F2;
 }
 
 .otherPollContainer{
@@ -98,9 +105,8 @@ code {
 
 .todayPollLeft{
   width: 65%;
- /* background-color:blue; */
- height: 85%;
-  border-bottom: 1px solid #AEAEAE;
+  /* background-color:blue; */
+  height: 85%;
   padding: 10px
 }
 
@@ -108,11 +114,14 @@ code {
   width: 35%;
  /* background-color:red; */
  height: 85%;
- border-bottom: 1px solid #AEAEAE;
  padding: 10px;
  display: flex;
  align-items: center;
  justify-content: center;
+}
+
+.borderBottom{
+  border-bottom: 1px solid #AEAEAE;
 }
 
 .todayPollTitle{
@@ -176,11 +185,40 @@ code {
   height: 10%;
   display: flex;
   align-items: center;
+  padding-left: 50px;
   /* border: 1px solid red; */
+}
+
+.marginTop{
+  margin-top: 120px;
 }
 
 .pollDate{
   color: #2F5A87;
   font-weight: 900;
   font-size: 80%;
+}
+
+.pollDetailsTitle{
+  font-size:calc(12px + 3vw);
+  width: 100%;
+  /* border: 1px solid red; */
+  padding-left: 10px;
+  padding-right: 10px;
+  height:auto;
+  padding-bottom: 20px;
+  border-bottom: 1px solid grey;
+}
+
+.publishContainer{
+  margin-top: 5px;
+  margin-bottom: 20px;
+  width: 100%;
+  color: grey;
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.publishTime{
+  margin-right: 5px;
 }
