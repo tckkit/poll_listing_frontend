@@ -92,7 +92,7 @@ export function Component() {
 
   return (
     <>
-      <div>
+      <div className="pollDetailsTitleContainer">
         {pollData && (
           <div className="pollDetailsTitle">
             <span>{pollData.title}</span>
@@ -107,7 +107,13 @@ export function Component() {
           </div>
         )}
       </div>
-      {pollData && <PollVote doughnutData={doughnutData} data={pollData} />}
+      {pollData && (
+        <PollVote
+          doughnutData={doughnutData}
+          data={pollData}
+          pollTitle={pollData.title}
+        />
+      )}
     </>
   );
 }

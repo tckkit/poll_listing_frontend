@@ -75,12 +75,13 @@ export const PollVote = (props) => {
       answers: [],
       totalVoteCount: "",
     },
+    pollTitle,
   } = props;
 
   const doughnutTextCenter = {
     id: "textCenter",
     beforeDatasetsDraw(chart, args, pluginOptions) {
-      const { ctx, data } = chart;
+      const { ctx } = chart;
 
       ctx.save();
       ctx.font = "bold 50px sans-serif";
@@ -152,50 +153,51 @@ export const PollVote = (props) => {
         isTodayPoll ? "greyBackground" : "blueBackground"
       }`}
     >
-      <div className={`todayPollLeft ${isTodayPoll ? "borderBottom" : ""}`}>
-        {isTodayPoll && <div className="todayPollTitle">Today's Poll</div>}
-        {isTodayPoll && (
-          <div className="todayPollName">
-            {data.title}{" "}
-            <span className="pollDate">
-              {convertTimestampToDateString(data.published_date)}
-            </span>
+      <div className="pollInnerContainer">
+        <div className={`todayPollLeft`}>
+          {isTodayPoll && <div className="todayPollTitle">Today's Poll</div>}
+          {pollTitle && <div className="pollTitle">{pollTitle}</div>}
+          {isTodayPoll && (
+            <div className="todayPollName">
+              {data.title}{" "}
+              <span className="pollDate">
+                {convertTimestampToDateString(data.published_date)}
+              </span>
+            </div>
+          )}
+          <div className="voteContainer">
+            {data.answers.length > 0 &&
+              answerPollColor &&
+              data.answers.map((answer, i) => (
+                <button
+                  className="voteButton"
+                  key={i}
+                  value={answer.id}
+                  style={{
+                    backgroundColor: answerPollColor[i],
+                    color: "white",
+                    border: "none",
+                    fontWeight: 900,
+                  }}
+                  onClick={onSubmit}
+                >
+                  {answer.label.toUpperCase()}
+                </button>
+              ))}
           </div>
-        )}
-        <div className="voteContainer">
-          {data.answers.length > 0 &&
-            answerPollColor &&
-            data.answers.map((answer, i) => (
-              <button
-                className="voteButton"
-                key={i}
-                value={answer.id}
-                style={{
-                  backgroundColor: answerPollColor[i],
-                  color: "white",
-                  border: "none",
-                  fontWeight: 900,
-                }}
-                onClick={onSubmit}
-              >
-                {answer.label.toUpperCase()}
-              </button>
-            ))}
         </div>
-        <div
-          className={`todayPollTotalVotes ${isTodayPoll ? "" : "marginTop"}`}
-        >
-          Total number of votes recorded: {data.totalVoteCount}
+        <div className={`todayPollRight`}>
+          {doughnutData && doughnutTextCenter && doughnutOptions && (
+            <Doughnut
+              data={doughnutData}
+              plugins={[doughnutTextCenter]}
+              options={doughnutOptions}
+            />
+          )}
         </div>
       </div>
-      <div className={`todayPollRight ${isTodayPoll ? "borderBottom" : ""}`}>
-        {doughnutData && doughnutTextCenter && doughnutOptions && (
-          <Doughnut
-            data={doughnutData}
-            plugins={[doughnutTextCenter]}
-            options={doughnutOptions}
-          />
-        )}
+      <div className={`todayPollTotalVotes ${isTodayPoll ? "borderTop" : ""}`}>
+        Total number of votes recorded: {data.totalVoteCount}
       </div>
     </div>
   );
